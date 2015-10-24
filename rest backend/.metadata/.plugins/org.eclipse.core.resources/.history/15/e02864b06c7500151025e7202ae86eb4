@@ -1,0 +1,5 @@
+package se.lundell.controller;
+
+public class LampController {
+
+}

@@ -1,0 +1,5 @@
+package se.lundell.rooms;
+
+public class Room {
+
+}

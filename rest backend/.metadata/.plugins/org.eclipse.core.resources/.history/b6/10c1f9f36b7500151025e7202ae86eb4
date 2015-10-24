@@ -1,0 +1,28 @@
+package se.lundell.rooms;
+
+public class Room {
+
+	private String ipNumber;
+	private String name;
+	
+	public Room(String ipNumber, String name) {
+		this.ipNumber = ipNumber;
+		this.name = name;
+	}
+
+	public String getIpNumber() {
+		return ipNumber;
+	}
+
+	public void setIpNumber(String ipNumber) {
+		this.ipNumber = ipNumber;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+}

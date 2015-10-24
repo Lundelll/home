@@ -1,0 +1,48 @@
+package se.lundell.rooms;
+
+public class Room {
+
+	private String ipNumber;
+	private String name;
+	private String response;
+	private boolean state;
+	
+	public Room(String ipNumber, String name, String response) {
+		this.ipNumber = ipNumber;
+		this.name = name;
+		this.response = response;
+		this.setState(false);
+	}
+
+	public String getIpNumber() {
+		return ipNumber;
+	}
+
+	public void setIpNumber(String ipNumber) {
+		this.ipNumber = ipNumber;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getResponse() {
+		return response;
+	}
+
+	public void setResponse(String response) {
+		this.response = response;
+	}
+
+	public boolean isState() {
+		return state;
+	}
+
+	public void setState(boolean state) {
+		this.state = state;
+	}
+}

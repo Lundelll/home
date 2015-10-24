@@ -1,0 +1,19 @@
+package se.lundell.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import se.lundell.rooms.Room;
+
+@RestController
+public class LampController {
+	
+	private static final String testAnswer = "Lamps in the %s is turned %s!";
+	
+	@RequestMapping
+	public Room livingRoom(@RequestParam(value="switch", defaultValue="off") boolean state) {
+		String onOrOff = state ? "on":"off";
+		return new Room("livingroom", String.format(testAnswer, "livingroom", onOrOff), state);
+	}
+}
