@@ -1,4 +1,4 @@
-package se.lundell.rooms;
+package se.lundell.domain;
 
 public class Room {
 

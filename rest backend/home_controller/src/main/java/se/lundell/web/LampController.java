@@ -1,14 +1,16 @@
-package se.lundell.controller;
+package se.lundell.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import se.lundell.rooms.Room;
+import se.lundell.domain.Room;
 
 @RestController
+@RequestMapping("/lamp/")
 public class LampController {
 	
 	private static final Logger log = LoggerFactory.getLogger(LampController.class);
@@ -26,5 +28,12 @@ public class LampController {
 		String onOrOff = state ? "on":"off";
 		log.info("The bedroom lamps are now turned " + onOrOff);
 		return new Room("bedroom", String.format(testAnswer, "bedroom", onOrOff), state);
+	}
+	
+	@RequestMapping("/{roomId}")
+	public Room toggleRoomLight(@PathVariable("roomId") int roomId) {
+		log.info("Lamp in room with id: " + roomId + " has been turned on or off");
+		
+		return new Room("test room", "an answer", true);
 	}
 }
