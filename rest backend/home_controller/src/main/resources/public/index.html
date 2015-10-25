@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html ng-app>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+	<script src="js/test.js"></script>
 </head>
 <body>
+	<div ng-controller="Test">
+		<p>The name is: {{ info.name }}</p>
+		<p>The response is: {{ info.response }} </p>
+		<p>The state is: {{ info.state }}
+	</div>
 	test igen!
 </body>
 </html>

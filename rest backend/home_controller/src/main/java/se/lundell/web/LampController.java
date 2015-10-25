@@ -2,9 +2,12 @@ package se.lundell.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import se.lundell.domain.Room;
@@ -30,10 +33,9 @@ public class LampController {
 		return new Room("bedroom", String.format(testAnswer, "bedroom", onOrOff), state);
 	}
 	
-	@RequestMapping("/{roomId}")
-	public Room toggleRoomLight(@PathVariable("roomId") int roomId) {
+	@RequestMapping(value="/{roomId}", method=RequestMethod.GET)
+	public @ResponseBody Room toggleRoomLight(@PathVariable("roomId") int roomId) {
 		log.info("Lamp in room with id: " + roomId + " has been turned on or off");
-		
-		return new Room("test room", "an answer", true);
+		return new Room("bedroom", String.format(testAnswer, "bedroom", "on or off"), true);
 	}
 }
