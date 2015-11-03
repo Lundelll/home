@@ -1,8 +1,12 @@
 package se.lundell.web;
 
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.ezand.telldus.cli.repository.CliRepository;
+import org.ezand.telldus.core.domain.Device;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +22,9 @@ public class LampController {
 	
 	private static final Logger log = LoggerFactory.getLogger(LampController.class);
 	private static final String testAnswer = "Lamps in the %s is turned %s!";
+	private static boolean on = false;
+	
+	CliRepository clientTelldusRepository = new CliRepository("/usr/bin/tdtool");
 	
 	@RequestMapping("/livingroom")
 	public Room livingRoom(@RequestParam(value="switch", defaultValue="0") boolean state) {
@@ -36,6 +43,22 @@ public class LampController {
 	@RequestMapping(value="/{roomId}", method=RequestMethod.GET)
 	public @ResponseBody Room toggleRoomLight(@PathVariable("roomId") int roomId) {
 		log.info("Lamp in room with id: " + roomId + " has been turned on or off");
+		List<Device> devices = clientTelldusRepository.getDevices();
+		
+		for(Device d : devices) {
+			System.out.println(d.toString());
+		}
+		
+		clientTelldusRepository.turnDeviceOff(2);
+		
+		try {
+			TimeUnit.SECONDS.sleep(1);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		clientTelldusRepository.turnDeviceOn(2);
+		
 		return new Room("bedroom", String.format(testAnswer, "bedroom", "on or off"), true);
 	}
 }

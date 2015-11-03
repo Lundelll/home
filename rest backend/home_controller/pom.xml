@@ -37,6 +37,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<dependency>
+		    <groupId>org.ezand.telldus</groupId>
+		    <artifactId>telldus-java</artifactId>
+		    <version>1.4</version>
+		</dependency>
 	</dependencies>
 	
 	<build>
