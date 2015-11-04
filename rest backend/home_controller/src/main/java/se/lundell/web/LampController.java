@@ -1,6 +1,7 @@
 package se.lundell.web;
 
 import org.ezand.telldus.cli.repository.CliRepository;
+import org.ezand.telldus.core.domain.State;
 import org.ezand.telldus.core.util.RichBoolean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,17 +38,17 @@ public class LampController {
 	}
 	
 	@RequestMapping(value="/{roomId}", method=RequestMethod.GET)
-	public @ResponseBody Room toggleRoomLight(@PathVariable("roomId") int roomId) {
-//		List<Device> devices = clientTelldusRepository.getDevices();
-		RichBoolean state = clientTelldusRepository.turnDeviceOff(2).getState();
+	public @ResponseBody Room toggleRoomLight(@PathVariable("roomId") int roomId, @RequestParam(value="switch") boolean state) {
 		
-		if(!state.asBoolean()) {
-			log.info("Did not turn " + state.asOnOff() + " the device, might already be " + state.asOnOff());
+		if(state) {
+			clientTelldusRepository.turnDeviceOn(roomId);
+			log.info("Lamp: " + roomId + " is turned on.");
+			return new Room("bedroom", String.format(testAnswer, "bedroom", "on"), true);
 		} else {
-			log.info("Lamp in room with id: " + roomId + " has been turned " + state.asOnOff());
+			clientTelldusRepository.turnDeviceOff(roomId);
+			log.info("Lamp: " + roomId + " is turned off.");
+			return new Room("bedroom", String.format(testAnswer, "bedroom", "off"), true);
 		}
-		
-		
-		return new Room("bedroom", String.format(testAnswer, "bedroom", state.asOnOff()), state.asBoolean());
+//		List<Device> devices = clientTelldusRepository.getDevices();	
 	}
 }
